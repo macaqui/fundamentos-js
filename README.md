@@ -52,3 +52,18 @@ Las imágenes provienen de **Wikimedia Commons** y se usan bajo licencia
 ---
 
 Proyecto desarrollado por **Samuel Hincapié**.
+
+---
+
+## Cómo abrirlo sin internet (desde la USB)
+
+React y Babel están incluidos en `vendor/`, así que las páginas funcionan sin
+conexión: abre cualquiera de estos archivos con doble clic.
+
+| Página | Archivo | Qué muestra |
+| --- | --- | --- |
+| Tarjeta personal | `css07102026/index.html` | Tarjeta con la frase de Luffy y una imagen |
+| Mi mejor deseo | `css21102026/index.html` | Galería de 3 imágenes con botones |
+
+> La galería pide los datos a una API local (`server/`, puerto 3000). Si esa API
+> no está encendida, la página igual se muestra con la primera imagen.
