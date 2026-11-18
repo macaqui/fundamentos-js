@@ -22,12 +22,15 @@
         //  esto es un hook // 
         const { useState, useEffect } = React;
 
+        // En local y en Render la API esta en el mismo servidor; en GitHub Pages uso la de Render.
+        const API = (location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.hostname.indexOf("onrender.com") !== -1) ? "" : "https://fundamentos-js.onrender.com";
+
         const Info = () => {
             const [data, setData] = useState([1]); // Datos que vienen del backend
             const [currentInfo, setCurrentInfo] = useState(1);
 
             useEffect(() => {
-                fetch("/items")
+                fetch(API + "/items")
                     .then((res) => res.json())
                     .then((res) => {
                         console.log(res.data);
@@ -63,7 +66,7 @@
             const [imagen, setImagen] = useState("1");
 
             const cargar = () => {
-                fetch("/api/deseos")
+                fetch(API + "/api/deseos")
                     .then((res) => res.json())
                     .then((res) => setDeseos(res))
                     .catch((e) => console.log(e));
@@ -73,7 +76,7 @@
 
             const crear = (e) => {
                 e.preventDefault();
-                fetch("/api/deseos", {
+                fetch(API + "/api/deseos", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ nombre: nombre, imagen: imagen })
@@ -87,7 +90,7 @@
             };
 
             const borrar = (id) => {
-                fetch("/api/deseos/" + id, { method: "DELETE" })
+                fetch(API + "/api/deseos/" + id, { method: "DELETE" })
                     .then((res) => res.json())
                     .then(() => cargar())
                     .catch((e) => console.log(e));
