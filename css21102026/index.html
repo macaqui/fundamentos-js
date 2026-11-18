@@ -27,7 +27,7 @@
             const [currentInfo, setCurrentInfo] = useState(1);
 
             useEffect(() => {
-                fetch("http://localhost:3000/items")
+                fetch("/items")
                     .then((res) => res.json())
                     .then((res) => {
                         console.log(res.data);
@@ -45,10 +45,7 @@
                     <h1>Mi mejor deseo</h1>
                     <img src={`img/${currentInfo}.jpg`} alt="info" />
 
-                    {/* Opción 1: Tus botones manuales corregidos usando setCurrentInfo */}
-                 
-
-                    <div>
+                    <div className="botones">
                         {data.map((item, index) => (
                             <button key={index} onClick={() => setCurrentInfo(item)}>
                                 Push me {item}
@@ -56,13 +53,90 @@
                         ))}
                     </div>
                 </>
-
             )
+        }
+
+        // Lista de deseos: lee, crea y borra con la API REST
+        const Deseos = () => {
+            const [deseos, setDeseos] = useState([]);
+            const [nombre, setNombre] = useState("");
+            const [imagen, setImagen] = useState("1");
+
+            const cargar = () => {
+                fetch("/api/deseos")
+                    .then((res) => res.json())
+                    .then((res) => setDeseos(res))
+                    .catch((e) => console.log(e));
+            };
+
+            useEffect(cargar, []);
+
+            const crear = (e) => {
+                e.preventDefault();
+                fetch("/api/deseos", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ nombre: nombre, imagen: imagen })
+                })
+                    .then((res) => res.json())
+                    .then(() => {
+                        setNombre("");
+                        cargar();
+                    })
+                    .catch((e) => console.log(e));
+            };
+
+            const borrar = (id) => {
+                fetch("/api/deseos/" + id, { method: "DELETE" })
+                    .then((res) => res.json())
+                    .then(() => cargar())
+                    .catch((e) => console.log(e));
+            };
+
+            return (
+                <section className="deseos">
+                    <h2>Mis deseos</h2>
+
+                    <form onSubmit={crear}>
+                        <input
+                            type="text"
+                            placeholder="Nombre"
+                            value={nombre}
+                            onChange={(e) => setNombre(e.target.value)}
+                            required
+                        />
+                        <input
+                            type="number"
+                            min="1"
+                            placeholder="Imagen"
+                            value={imagen}
+                            onChange={(e) => setImagen(e.target.value)}
+                            required
+                        />
+                        <button type="submit">Agregar</button>
+                    </form>
+
+                    <ul>
+                        {deseos.map((d) => (
+                            <li key={d.id}>
+                                <span>{d.nombre}</span>
+                                <img className="mini" src={`img/${d.imagen}.jpg`} alt={`Imagen ${d.imagen}`} />
+                                <button type="button" onClick={() => borrar(d.id)}>Borrar</button>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            );
         }
 
         // Renderizar la aplicación en el DOM virtual
         const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<Info />);
+        root.render(
+            <>
+                <Info />
+                <Deseos />
+            </>
+        );
     </script>
 </body>
 
