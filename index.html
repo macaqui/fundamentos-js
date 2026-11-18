@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fundamentos de JavaScript · Samuel Hincapié</title>
+<meta name="description" content="Ejercicios de fundamentos de desarrollo web: página con React, estilos con CSS y consumo de una API con fetch.">
+<style>
+  :root {
+    --fondo: #0d1117;
+    --panel: #161b22;
+    --borde: #2a3341;
+    --texto: #e6edf3;
+    --tenue: #9aa7b8;
+    --acento: #58a6ff;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 3rem 1.25rem 4rem;
+    background:
+      radial-gradient(60rem 30rem at 50% -10%, #1b2430 0%, transparent 70%),
+      var(--fondo);
+    color: var(--texto);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+  }
+
+  .envoltura { width: min(56rem, 100%); margin: 0 auto; }
+
+  .eyebrow {
+    margin: 0 0 .35rem;
+    font-size: .8rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--acento);
+  }
+
+  h1 { margin: 0 0 .5rem; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.2; }
+
+  .lead { margin: 0 0 2.25rem; max-width: 46rem; color: var(--tenue); }
+
+  .tarjetas { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+
+  .tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1.35rem;
+    border: 1px solid var(--borde);
+    border-radius: .9rem;
+    background: var(--panel);
+    color: inherit;
+    text-decoration: none;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+
+  .tarjeta:hover, .tarjeta:focus-visible {
+    transform: translateY(-3px);
+    border-color: var(--acento);
+    outline: none;
+  }
+
+  .etiqueta {
+    align-self: flex-start;
+    padding: .15rem .55rem;
+    border-radius: 999px;
+    background: rgba(88, 166, 255, .12);
+    color: var(--acento);
+    font-size: .72rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  .tarjeta h2 { margin: 0; font-size: 1.15rem; }
+  .tarjeta p { margin: 0; color: var(--tenue); font-size: .95rem; }
+
+  .ir { margin-top: .35rem; color: var(--acento); font-size: .9rem; font-weight: 600; }
+
+  .nota {
+    margin-top: 1.75rem;
+    padding: 1rem 1.15rem;
+    border-left: 3px solid var(--acento);
+    border-radius: .35rem;
+    background: rgba(88, 166, 255, .07);
+    color: var(--tenue);
+    font-size: .9rem;
+  }
+
+  footer { margin-top: 2.5rem; color: var(--tenue); font-size: .85rem; }
+  footer a { color: var(--acento); }
+</style>
+</head>
+<body>
+  <div class="envoltura">
+    <p class="eyebrow">Samuel Hincapié · SENA</p>
+    <h1>Fundamentos de JavaScript</h1>
+    <p class="lead">
+      Ejercicios de fundamentos de desarrollo web: estructura de una página con
+      <strong>React</strong>, estilos con <strong>CSS</strong> y consumo de una
+      <strong>API con <code>fetch</code></strong>.
+    </p>
+
+    <div class="tarjetas">
+      <a class="tarjeta" href="css07102026/index.html">
+        <span class="etiqueta">React · CSS</span>
+        <h2>Tarjeta personal</h2>
+        <p>Primer ejercicio: un componente de React con estilos propios.</p>
+        <span class="ir">Abrir ejercicio →</span>
+      </a>
+
+      <a class="tarjeta" href="css21102026/index.html">
+        <span class="etiqueta">React · API · fetch</span>
+        <h2>Mi mejor deseo (galería)</h2>
+        <p>Galería que pide datos a una API con <code>fetch</code> y cambia la imagen según la respuesta.</p>
+        <span class="ir">Abrir ejercicio →</span>
+      </a>
+    </div>
+
+    <p class="nota">
+      <strong>Nota:</strong> la galería consulta un servidor local en
+      <code>http://localhost:3000/items</code> (Express). Si no está encendido, muestra la
+      primera imagen por defecto; el error se controla con <code>.catch</code>.
+    </p>
+
+    <footer>
+      Proyecto de la Técnica en Desarrollo de Software ·
+      <a href="https://github.com/macaqui/fundamentos-js">código en GitHub</a>
+    </footer>
+  </div>
+</body>
+</html>
